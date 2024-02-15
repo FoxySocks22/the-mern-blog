@@ -9,14 +9,18 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please provide an email address.'],
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
         required: [true, 'Please provide a password.'],
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+        select: false
     }
-    }, { timeStamp: true }
-)
+})
 
 const User = mongoose.model('User', userSchema);
 
