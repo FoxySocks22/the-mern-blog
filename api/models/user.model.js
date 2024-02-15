@@ -1,25 +1,23 @@
-import Mongoose from "mongoose";
-import validator from 'validator';
+import mongoose from "mongoose";
 
-const userSchema = new Mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, 'Please provide a username.'],
         unique: true
     },
     email: {
         type: String,
-        required: true,
+        required: [true, 'Please provide an email address.'],
         unique: true,
-        validator: [validator.isEmail, 'Please provide a valid email address.']
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Please provide a password.'],
     }
     }, { timeStamp: true }
 )
 
-const User = Mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 export default User;
