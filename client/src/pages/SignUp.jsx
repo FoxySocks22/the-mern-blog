@@ -37,7 +37,7 @@ export default function SignUp() {
             <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>The Foxy</span>
             Blog
           </Link>
-          <p className="text-sm mt-5">Signup using an email or password, or using Google.</p>
+          <p className="text-sm mt-5">Sign up using email and password, or using Google.</p>
         </div>
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={ handleSubmit }>
