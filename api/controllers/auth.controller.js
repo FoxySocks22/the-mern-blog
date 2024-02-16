@@ -64,14 +64,9 @@ export const google = async(req, res, next) => {
             const generatedPassword = Math.random().toString(36).slice(-8);
             const hashPassword = bcryptjs.hashSync(generatedPassword, 10);
             const newUser = new User({
-                username: name
-                    .toLowercase()
-                    .split(' ')
-                    .join('')
-                    + Math.random().toString(9)
-                    .slice(-4),
+                username: name.split(' ').toLowerCase().join('')+ Math.random().toString(9).slice(-4),
                 email,
-                hashPassword,
+                password: hashPassword,
                 profilePicture: googlePhotoUrl
             })
             await newUser.save();
