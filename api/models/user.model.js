@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         select: false
+    },
+    updatedAt: {
+        type: Date,
+        select: false
     }
 })
 
