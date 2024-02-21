@@ -61,12 +61,13 @@ export const google = async(req, res, next) => {
                 httpOnly: true
             }).json(mutatedUser);
         } else {
-            const generatedPassword = Math.random().toString(36).slice(-8);
-            const hashPassword = bcryptjs.hashSync(generatedPassword, 10);
+            // const generatedPassword = Math.random().toString(36).slice(-8);
+            // const hashPassword = bcryptjs.hashSync(generatedPassword, 10);
             const newUser = new User({
-                username: name.split(' ').toLowerCase().join('')+ Math.random().toString(9).slice(-4),
+                username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
                 email,
-                password: hashPassword,
+                // password: hashPassword,
+                password: 'Password',
                 profilePicture: googlePhotoUrl
             })
             await newUser.save();
