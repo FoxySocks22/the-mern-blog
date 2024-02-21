@@ -15,9 +15,9 @@ export const updateUser = async(req, res, next) => {
         req.body.password = bcryptjs.hashSync(req.body.password, 10);
     }
     if(req.body.username) {
-        if(req.body.username.length < 7 || req.body.username.length > 20) return next(errorHandler(400, 'Username must be between 7 and 20 characters'));
-        if(req.body.username.includes(' ')) return next(errorHandler(400, 'Username cannot contain spaces'));
-        if(!req.body.username.match(/^[a-zA-Z0-9]+$/)) return next(errorHandler(400, 'Username can only contain letters and numbers'));
+        if(req.body.username.length < 7 || req.body.username.length > 20) return next(errorHandler(400, 'Username must be between 7 and 20 characters.'));
+        if(req.body.username.includes(' ')) return next(errorHandler(400, 'Username cannot contain spaces.'));
+        if(!req.body.username.match(/^[a-zA-Z0-9]+$/)) return next(errorHandler(400, 'Username can only contain letters and numbers.'));
     }
     try {
         const updatedUser = await User.findByIdAndUpdate(
@@ -37,3 +37,15 @@ export const updateUser = async(req, res, next) => {
         next(error);
     }
 };
+
+export const deleteUser = async(req, res, next) => {
+    if(req.user.id !== req.params.id) return next(errorHandler(403, 'You are not allowed to delete this user.'));
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            message: 'User has been deleted.'
+        })
+    } catch(error) {
+        next(error);
+    }
+}
