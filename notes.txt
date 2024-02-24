@@ -1,2 +1,0 @@
-Very useful git resource
-https://www.nobledesktop.com/learn/git/git-branches
