@@ -15,8 +15,8 @@ export default function header() {
   return (
     <Navbar className='border-b-2'>
       <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
-        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>The Foxy</span>
-        Blog
+        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Foxy</span>
+        Socks
       </Link>
       <form>
         <TextInput
@@ -41,7 +41,7 @@ export default function header() {
             <Avatar alt='User' img={ currentUser.profilePicture } rounded />
           }>
             <DropdownHeader>
-              <span className='block text-sm'>@{ currentUser.username }</span>
+              <span className='block text-sm'>{ currentUser.username }</span>
               <span className='block text-sm fomt-medium truncate'>{ currentUser.email }</span>
             </DropdownHeader>
             <Link to='/dashboard?tab=profile'>
@@ -70,6 +70,12 @@ export default function header() {
           </Navbar.Link>
           <Navbar.Link active={ path === '/projects' } as={'div'}>
             <Link to='/projects'>Projects</Link>
+          </Navbar.Link>
+          <Navbar.Link active={ path === '/resume' } as={'div'}>
+            <Link to='/resume'>Resume</Link>
+          </Navbar.Link>
+          <Navbar.Link active={ path === '/blog' } as={'div'}>
+            <Link to='/blog'>Blog</Link>
           </Navbar.Link>
         </Navbar.Collapse>
     </Navbar>

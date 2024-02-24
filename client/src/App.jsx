@@ -4,10 +4,12 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import CreatePost from './pages/CreatePost';
 import Dashboard from './pages/Dashboard';
 import Header from './components/header';
 import Footer from './components/footer';
 import PrivateRoute from './components/privateRoute';
+import OnlyAdmin from './components/admin';
 
 export default function App() {
   return (
@@ -19,6 +21,9 @@ export default function App() {
             <Route path='/projects' element={ <Projects /> }/>
             <Route element={ <PrivateRoute /> }>
               <Route path='/dashboard' element={ <Dashboard /> }/>
+            </Route>
+            <Route element={ <OnlyAdmin /> }>
+              <Route path='/create-post' element={ <CreatePost /> }/>
             </Route>
             <Route path='/sign-in' element={ <SignIn /> }/>
             <Route path='/sign-up' element={ <SignUp /> }/>

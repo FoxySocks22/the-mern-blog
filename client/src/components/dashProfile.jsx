@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import { Link } from 'react-router-dom';
 import { Alert, Button, Modal, TextInput } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +17,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export default function dashProfile() {
     const filePickerRef = useRef();
-    const { currentUser } = useSelector(state => state.user);
+    const { currentUser, loading } = useSelector(state => state.user);
     const [ image, setImage ] = useState(null);
     const [ tempImgUrl, setTempImgUrl ] = useState(null);
     const [ uploadProgress, setUploadProgress ] = useState(null);
@@ -174,9 +175,20 @@ export default function dashProfile() {
                 placeholder='********'
                 onChange={ handleChange }
             />
-            <Button type='submit' gradientDuoTone='purpleToBlue' outline>
-                Update
+            <Button type='submit' gradientDuoTone='purpleToBlue' disabled={ loading || imageUploading } outline>
+                {
+                    loading || imageUploading ? 'Loading' : 'Update'
+                }
             </Button>
+            {
+                currentUser.isAdmin && (
+                    <Link to='/create-post'>
+                        <Button type='button' gradientDuoTone='purpleToPink' className='w-full'>
+                            Create post
+                        </Button>
+                    </Link>
+                )
+            }
         </form>
         <div className='text-red-500 flex justify-between mt-5'>
             <span className='cursor-pointer' onClick={() => setShowModal(true) } >Delete Account</span>
