@@ -25,6 +25,7 @@ export default function App() {
             <Route element={ <OnlyAdmin /> }>
               <Route path='/create-post' element={ <CreatePost /> }/>
             </Route>
+            {/* Need removing for signed in users             */}
             <Route path='/sign-in' element={ <SignIn /> }/>
             <Route path='/sign-up' element={ <SignUp /> }/>
         </Routes>

@@ -20,7 +20,7 @@ export default function dashSidebar({ tab, user }) {
                     </Link>
                     {
                         user.isAdmin && (
-                            <Link to='/dashboard?tab=post'>
+                            <Link to='/create-post'>
                                 <Sidebar.Item active={ tab === 'post' } icon={ TfiWrite } as="div">
                                     Create post
                                 </Sidebar.Item>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashSidebar from '../components/dashSidebar';
-import DashPost from '../components/dashPost';
 import DashProfile from '../components/dashProfile';
 import { useSelector } from 'react-redux';
 
@@ -23,7 +22,6 @@ export default function Dashboard() {
         />
       </div>
       { tab === 'profile' && <DashProfile /> }
-      { tab === 'post' && <DashPost /> }
     </div>
   )
 }
