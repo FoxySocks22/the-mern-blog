@@ -1,6 +1,4 @@
 /* eslint-disable */
-
-import { Link } from 'react-router-dom';
 import { Alert, Button, Modal, TextInput } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +11,7 @@ import {
     deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess
 } from '../redux/user/userSlice';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-// import { test } from '../utils/signout';
+import signOut from '../factory/signOut';
 
 export default function dashProfile() {
     const filePickerRef = useRef();
@@ -26,17 +24,7 @@ export default function dashProfile() {
     const [ imageUploading, setImageUploading ] = useState(false);
     const [ showModal, setShowModal ] = useState(false);
     const dispatch = useDispatch();
-    const handleSignOut = async() => {
-        try {
-            const res = await fetch('/api/user/signout', {
-                method: 'POST'
-            })
-            !res.ok ? console.log(data.message) : dispatch(signoutSuccess());
-            const data = res.json();
-        } catch(error) {
-            setUploadMessage(error.message);
-        }
-    }
+
     const handleImageUpdate = (e) => {
         const file = e.target.files[0];
         if(file){
@@ -180,19 +168,13 @@ export default function dashProfile() {
                     loading || imageUploading ? 'Loading' : 'Update'
                 }
             </Button>
-            {
-                currentUser.isAdmin && (
-                    <Link to='/create-post'>
-                        <Button type='button' gradientDuoTone='purpleToPink' className='w-full'>
-                            Create post
-                        </Button>
-                    </Link>
-                )
-            }
         </form>
         <div className='text-red-500 flex justify-between mt-5'>
             <span className='cursor-pointer' onClick={() => setShowModal(true) } >Delete Account</span>
-            <span className='cursor-pointer' onClick={ handleSignOut }>Sign Out</span>
+            <span className='cursor-pointer' 
+                onClick={() => signOut(dispatch) }>
+                Sign Out
+            </span>
         </div>
         <Modal show={ showModal } onClose={() => setShowModal(false)} popup size='md'>
             <Modal.Header/>
