@@ -2,7 +2,7 @@
 
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiUser, HiOutlineMinusSm, HiOutlinePlusSm } from 'react-icons/hi';
-import { AiFillCloseCircle, AiFillSetting } from "react-icons/ai";
+import { AiFillNotification, AiFillHome, AiFillLayout, AiFillCloseCircle, AiFillSetting, AiFillPushpin, AiFillProfile } from "react-icons/ai";
 import { TfiWrite } from "react-icons/tfi";
 import { Link } from 'react-router-dom';
 import signOut from '../factory/signOut';
@@ -29,7 +29,7 @@ export default function dashSidebar({ tab, user }) {
                         </Sidebar.Item>
                     </Link>
                     <Link to='/dashboard?tab=my-posts'>
-                        <Sidebar.Item active={ tab === 'my-posts' } icon={ TfiWrite } as="div">
+                        <Sidebar.Item active={ tab === 'my-posts' } icon={ AiFillPushpin } as="div">
                             My blogs
                         </Sidebar.Item>
                     </Link>
@@ -61,7 +61,7 @@ export default function dashSidebar({ tab, user }) {
                 { user.isAdmin && (
                 <Sidebar.ItemGroup>
                     <Link to='/dashboard?tab=all-posts'>
-                        <Sidebar.Item active={ tab === 'all-posts' } icon={ HiUser } as="div">
+                        <Sidebar.Item active={ tab === 'all-posts' } icon={ AiFillProfile } as="div">
                             All Posts
                         </Sidebar.Item>
                     </Link>
@@ -70,6 +70,25 @@ export default function dashSidebar({ tab, user }) {
                             Create
                         </Sidebar.Item>
                     </Link>
+                    <Sidebar.Collapse
+                        icon={ AiFillLayout }
+                        label="CMS"
+                        renderChevronIcon={(theme, open) => {
+                            const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
+                            return <IconComponent aria-hidden className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])} />;
+                        }}>
+                            <Link to='/dashboard?tab=home'>
+                                <Sidebar.Item active={ tab === 'home' } icon={ AiFillHome } as="div" label="edit" labelColor="dark">
+                                    Home
+                                </Sidebar.Item>
+                            </Link>
+                            <Link to='/dashboard?tab=about'>
+                                <Sidebar.Item active={ tab === 'about' } icon={ AiFillNotification } as="div" label="edit" labelColor="dark">
+                                    About
+                                </Sidebar.Item>
+                            </Link>
+
+                    </Sidebar.Collapse>
                 </Sidebar.ItemGroup>
                 )}
             </Sidebar.Items>

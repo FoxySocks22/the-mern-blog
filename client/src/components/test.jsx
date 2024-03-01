@@ -3,7 +3,7 @@
 import { Button, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../redux/user/userSlice';
+import { deleteUserStart, deleteUserSuccess } from '../redux/user/userSlice';
 import { setMessage, setMessageType, clearMessage } from "../redux/message/messageSlice";
 
 export default function test({ user }) {
@@ -30,7 +30,8 @@ export default function test({ user }) {
         dispatch(deleteUserSuccess(data));
       }
     } catch(error) {
-      dispatch(deleteUserFailure(error.message));
+      dispatch(setMessageType('failure'));
+      dispatch(setMessage(error));
     }
   }
 
