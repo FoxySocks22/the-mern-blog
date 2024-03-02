@@ -25,17 +25,10 @@ export const publish = async(req, res, next) => {
 }
 
 export const getPageContent = async(req, res, next) => {
-    if(!req.user.isAdmin){
-        return next(errorHandler(
-            403, 
-            'Only admins can edit website content.'
-            )
-        )
-    }
     try {
         const id = req.params.id;
         const content = await Content.findById( id );
-        res.status(200).json(content);
+        res.status(200).json(content.content);
     } catch(error) {
         next(error);
     }

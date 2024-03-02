@@ -5,6 +5,6 @@ import { verifyUser } from '../utils/verifyUser.js';
 const router = express.Router();
 
 router.put('/:id', verifyUser, publish);
-router.get('/:id', verifyUser, getPageContent);
+router.get('/:id', getPageContent);
 
 export default router;

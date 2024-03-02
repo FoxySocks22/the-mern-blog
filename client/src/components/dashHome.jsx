@@ -10,20 +10,20 @@ import { setMessage, setMessageType } from "../redux/message/messageSlice";
 export default function dashHome() {
   const dispatch = useDispatch();
   const [ formData, setFormData ] = useState({});
-  
-  useEffect(() => {
-  },[])
 
-  const getContent = async() => {
-    try {
-      const res = await fetch('/api/content/65e08988e8b595c293d3a498');
-      const data = await res.json();
-      setFormData({ ...formData, content: data });
-      console.log(formData);
-    } catch(error) {
-      dispatch(setMessageType('failure'));
-      dispatch(setMessage(error));
-    }
+  useEffect(() => {
+    getContent();
+    console.log(`useEffect: ${formData}`);
+  })
+  
+  const getContent = () => {
+    fetch('/api/content/65e08988e8b595c293d3a498')
+    .then((res) => res.json())
+    .then((data) => {
+      setFormData(data);
+      console.log(`method: ${formData}`);
+      // setFormData({ ...formData, content: data });
+    })
   }
 
   const handleSubmit = async (e) => {
@@ -54,15 +54,18 @@ export default function dashHome() {
   return (
     <div>
       <h1 className='text-center text-3xl my-7 font-semibold'>Edit Homepage Content</h1>
-      <form className='flex flex-col gap-4' >
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <ReactQuill
           theme='snow'
+          placeholder='Write something...'
           className='h-72 mb-12'
-          defaultValuvalee={ formData }
+          value={ formData }
+          required
           onChange={(value) => {
             setFormData({ ...formData, content: value });
-          }} />
-        <Button type='button' gradientDuoTone='purpleToPink' onClick={ getContent }>
+          }} 
+          />
+        <Button type='submit' gradientDuoTone='purpleToPink'>
           Publish
         </Button>
       </form>
